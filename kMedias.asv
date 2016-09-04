@@ -1,0 +1,60 @@
+%% K-MEDIAS
+
+function centroides = kMedias(vectores)
+    
+    for i = 1:16
+        z{i} = vectores{i};
+        zAnt{i} = zeros(1,length(vectores{i}));
+    end
+    
+    while notEqual(z,zAnt)
+        
+        zAnt = z;
+        
+        display('entro')
+        
+        for vector = 1:length(vectores)
+            for cent = 1:length(z)
+                d{vector}(cent) = sum((z{cent}-vectores{vector}).^2);
+            end
+        end
+        
+        vect=cell(16);
+        for vector = 1:length(vectores)
+            
+            [val,ind]=min(d{vector});
+            display(ind)
+            vect{ind}=[vect{ind};vectores{vector}];
+                
+        end
+        
+        display(vect)
+        
+        centroides = vect;
+        %display(d)
+        
+    end
+    
+    
+    %display(z)
+    %centroides=0;
+
+end
+
+function res = notEqual(z,zAnt)
+    
+    res = 1;
+
+    for s = 1:16
+        b{s} = isequal(z{s},zAnt{s});
+        res = res & b{s};
+    end
+    
+    if res == 0
+        res = 1;
+    else 
+        res = 0;
+    end
+
+        
+end
